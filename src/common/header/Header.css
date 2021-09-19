@@ -1,0 +1,20 @@
+.header{
+    background-color:#222;
+    height: 36px;
+    padding: 8px 32px 8px 16px;
+    color: aliceblue;
+    display:flex;
+    justify-content:space-between;
+}
+
+.svgimg{
+    height: 35px;
+    background-color:#ff7f7f;
+    animation: spin 8s linear infinite;
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg); 
+    }
+}
