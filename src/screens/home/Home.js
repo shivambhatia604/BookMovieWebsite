@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./Home.css";
 import { Header } from "../../common/header/Header";
-import { makeStyles } from "@material-ui/core/styles";
 import ImageList from "@material-ui/core/ImageList";
 import ImageListItem from "@material-ui/core/ImageListItem";
 import ImageListItemBar from "@material-ui/core/ImageListItemBar";
@@ -26,97 +24,9 @@ import {
   KeyboardDatePicker,
 } from "@material-ui/pickers";
 import Button from "@material-ui/core/Button";
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    // minHeight: "250px",
-    flexWrap: "wrap",
-    justifyContent: "space-around",
-    overflow: "hidden",
-    backgroundColor: theme.palette.background.paper,
-  },
-  imageList: {
-    flexWrap: "nowrap",
-    // minHeight: "250px",
-    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
-    transform: "translateZ(0)",
-  },
-  imageListItem: {
-    minHeight: "250px",
-    maxWidth: "16.6%",
-  },
-  title: {
-    color: "white",
-  },
-  titleBar: {
-    background:
-      "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
-  },
-}));
+import {useStyles,useStyles2,MenuProps} from "./HomeCss";
 
-const useStyles2 = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    //   flexWrap: 'wrap',
-    justifyContent: "space-around",
-    overflow: "hidden",
-    backgroundColor: theme.palette.background.paper,
-  },
-  imageList: {
-    width: "76%",
-    //   height: 450,
-  },
-  imageListItem: {
-    maxWidth: "25%",
-    minHeight: 350,
-    "&:hover": {
-      cursor: "pointer",
-    },
-  },
-  icon: {
-    color: "rgba(255, 255, 255, 0.54)",
-  },
-  card: {
-    width: "24%",
-  },
-  title: {
-    fontSize: 14,
-    color: theme.palette.primary.light,
-  },
-  form: {
-    margin: theme.spacing(1),
-
-    // width: '35ch',
-  },
-  txtfld: {
-    width: "80%",
-  },
-  formControl: {
-    margin: theme.spacing(1),
-    // minWidth: 120,
-    // maxWidth: 300,
-    width: "75%",
-  },
-  date: {
-    marginLeft: "8px",
-  },
-  btn: {
-    display: "flex",
-    justifyContent: "center",
-  },
-}));
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
-
-const Home = ({ baseUrl }) => {
+const Home = ({ baseUrl,history }) => {
   const [movieList, setMovieList] = useState([]);
   const [filtermovieList, setfilterMovieList] = useState([]);
   useEffect(() => {
@@ -225,7 +135,7 @@ const Home = ({ baseUrl }) => {
   return (
     <div>
       <Header />
-      <div className="heading">Upcoming Movies</div>
+      <div className={classes.heading}>Upcoming Movies</div>
       <div className={classes.root}>
         <ImageList className={classes.imageList} cols={2.5}>
           {movieList
@@ -258,7 +168,7 @@ const Home = ({ baseUrl }) => {
           {filtermovieList
             .filter((item) => item.status === "RELEASED")
             .map((item) => (
-              <ImageListItem key={item.id} className={classes2.imageListItem}>
+              <ImageListItem key={item.id} onClick={()=>history.push(`${"/movie/"}${item.id}`)} className={classes2.imageListItem}>
                 <img src={item.poster_url} alt={item.title} />
                 <ImageListItemBar
                   title={item.title}
