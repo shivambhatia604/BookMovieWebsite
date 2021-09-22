@@ -10,17 +10,18 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
-export const Header = () => {
+export const Header = ({detailsPage}) => {
     const classes = useStyles();
 
   return (
     <div className="header">
       <img className="svgimg" src={Logo} alt="" />
       <div>
-      <Button className={classes.button}variant="contained" color="primary">
+      {detailsPage?<Button className={classes.button}variant="contained" color="primary">
           BOOk SHOW
-        </Button>
-        <Button variant="contained">LOGIN</Button>
+        </Button>:""}
+      
+        <Button variant="contained" >LOGIN</Button>
         
       </div>
     </div>

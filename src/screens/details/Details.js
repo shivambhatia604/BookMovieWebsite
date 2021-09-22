@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Header } from "../../common/header/Header";
 import { Fragment } from "react";
 import StarBorderIcon from '@material-ui/icons/StarBorder';
+import {loginModal} from '../../common/Login Modal/loginModal';
 
 const useStyles = makeStyles({
   root: {
@@ -28,7 +29,7 @@ const useStyles = makeStyles({
   },
 });
 
-export const Details = ({ baseUrl, match }) => {
+export const Details = ({ baseUrl, match, history }) => {
   const [movieObj, setMovieObj] = useState({
     title: '',
     genres: [],
@@ -59,8 +60,8 @@ export const Details = ({ baseUrl, match }) => {
   const classes = useStyles();
   return (
     <Fragment>
-      <Header />
-      <div className={classes.home}>Back to Home</div>
+      <Header detailsPage/>
+      <div className={classes.home} onClick={()=>history.push("/")}>Back to Home</div>
       <div className={classes.root}>
         <div className={classes.divOne}>
           <div
@@ -122,6 +123,7 @@ export const Details = ({ baseUrl, match }) => {
           <StarBorderIcon style={starOne? {color: "yellow"}: {color: "black"} } /> <StarBorderIcon style={starOne? {color: "yellow"}: {color: "black"} }/> <StarBorderIcon style={starOne? {color: "yellow"}: {color: "black"} }/> <StarBorderIcon style={starOne? {color: "yellow"}: {color: "black"} }/> <StarBorderIcon style={starOne? {color: "yellow"}: {color: "black"} }/>
         </div>
       </div>
+      
     </Fragment>
   );
 };
